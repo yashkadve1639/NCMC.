@@ -3,117 +3,417 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NCMC माहिती</title>
+<title>NCMC (National Common Mobility Card) संपूर्ण माहिती</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-    body{
-        font-family: Arial, sans-serif;
-        background:#f5f5f5;
-        margin:0;
-        padding:20px;
-        line-height:1.7;
+    :root {
+        --primary-color: #d32f2f;
+        --secondary-color: #f44336;
+        --text-color: #2c3e50;
+        --bg-color: #f4f6f9;
+        --card-bg: #ffffff;
     }
-    .container{
-        max-width:800px;
-        margin:auto;
-        background:#fff;
-        padding:20px;
-        border-radius:10px;
-        box-shadow:0 0 10px rgba(0,0,0,0.1);
+    
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: var(--bg-color);
+        margin: 0;
+        padding: 0; /* वरची पॅडिंग काढून टाकली जेणेकरून नेव्हबार टॉपला बसेल */
+        line-height: 1.8;
+        color: var(--text-color);
     }
-    h1{
-        text-align:center;
-        color:#d32f2f;
+
+    /* 🔴 नवीन कडक प्रोफेशनली स्टिकी हेडर बार (सर्व स्क्रीनवर एकत्र फिरेल) */
+    .sticky-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-bottom: 3px solid var(--primary-color);
     }
-    h2{
-        color:#d32f2f;
-        border-left:5px solid #d32f2f;
-        padding-left:10px;
+
+    .brand-identity {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
-    ul{
-        padding-left:20px;
+
+    .brand-identity img {
+        width: 42px;
+        height: 42px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
     }
-    li{
-        margin-bottom:8px;
+
+    .brand-identity .brand-name {
+        font-weight: 700;
+        font-size: 16px;
+        color: #222;
+        letter-spacing: 0.5px;
     }
-    .note{
-        background:#fff3cd;
-        border-left:5px solid #ff9800;
-        padding:12px;
-        border-radius:5px;
+
+    .navbar-right-tag {
+        font-size: 12px;
+        background: var(--primary-color);
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+    
+    /* मुख्य माहितीचा कंटेनर */
+    .container {
+        max-width: 800px;
+        margin: 90px auto 40px auto; /* ९० पिक्सल्स वरून जागा सोडली जेणेकरून हेडर मागे मजकूर लपणार नाही */
+        background: var(--card-bg);
+        padding: 35px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    
+    /* मुख्य हेडिंग */
+    .header-area {
+        text-align: center;
+        margin-bottom: 35px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    
+    h1 {
+        color: var(--primary-color);
+        font-size: 28px;
+        margin: 0;
+        font-weight: 700;
+    }
+    
+    h2 {
+        color: var(--primary-color);
+        font-size: 21px;
+        border-left: 5px solid var(--primary-color);
+        padding-left: 12px;
+        margin-top: 35px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .highlight {
+        color: var(--secondary-color);
+        font-weight: bold;
+    }
+    
+    ul, ol {
+        padding-left: 5px;
+        list-style: none;
+    }
+    
+    li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+        font-size: 16px;
+    }
+
+    li i.check-icon {
+        color: #2e7d32;
+        margin-right: 12px;
+        margin-top: 5px;
+        font-size: 16px;
+    }
+
+    ol {
+        counter-reset: step-counter;
+    }
+
+    ol li {
+        counter-increment: step-counter;
+    }
+
+    ol li::before {
+        content: counter(step-counter);
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 12px;
+        padding: 0;
+    }
+
+    .grid-layout li {
+        background: #f8f9fa;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #eef2f5;
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+
+    .grid-layout li i {
+        color: #1565c0;
+        margin-right: 10px;
+        margin-top: 4px;
+    }
+    
+    .warning-box {
+        background: #fff3e0;
+        color: #e65100;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .danger-box {
+        background: #ffebee;
+        color: #c62828;
+        padding: 18px;
+        border-radius: 8px;
+        font-size: 15px;
+        margin-top: 20px;
+        border-left: 4px solid #d32f2f;
+    }
+
+    .note {
+        background: #fffde7;
+        border-left: 4px solid #fbc02d;
+        padding: 22px;
+        border-radius: 8px;
+        margin-top: 40px;
+    }
+
+    .note-title {
+        color: #f57f17;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 17px;
+    }
+
+    .faq-item {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border-left: 4px solid #00796b;
+    }
+
+    .faq-question {
+        font-weight: bold;
+        color: #004d40;
+        margin-bottom: 5px;
+    }
+
+    .faq-answer {
+        color: #555;
+    }
+
+    /* 📱 मोबाईल व्ह्यूसाठी खास सेटिंग्ज */
+    @media (max-width: 600px) {
+        .sticky-navbar {
+            padding: 8px 12px;
+        }
+        .brand-identity .brand-name {
+            font-size: 14px;
+        }
+        .brand-identity img {
+            width: 35px;
+            height: 35px;
+        }
+        .container { 
+            padding: 20px; 
+            margin-top: 80px; /* मोबाईलवर गॅप सेट केली */
+        }
+        h1 { font-size: 22px; }
+        h2 { font-size: 18px; }
+        .grid-layout { grid-template-columns: 1fr; }
+        .navbar-right-tag { font-size: 10px; padding: 3px 8px; }
     }
 </style>
 </head>
 <body>
 
-<div class="container">
-
-<h1>🔴 NCMC म्हणजे काय?</h1>
-
-<p><strong>NCMC (National Common Mobility Card)</strong> म्हणजे <strong>National Common Mobility Card</strong>. याला <strong>"One Nation, One Card"</strong> असेही म्हणतात. हे <strong>RuPay आधारित Contactless कार्ड</strong> आहे.</p>
-
-<h2>🔴 याचा उपयोग काय?</h2>
-<p>हे कार्ड <strong>NCMC-सक्षम सार्वजनिक वाहतूक सेवांमध्ये Tap करून पेमेंट करण्यासाठी</strong> वापरले जाते.</p>
-
-<h2>🔴 कुठे वापरता येते?</h2>
-<ul>
-<li>✅ NCMC-सक्षम MSRTC (ST) बस</li>
-<li>✅ Metro</li>
-<li>✅ City Bus</li>
-<li>✅ Parking (काही ठिकाणी)</li>
-<li>✅ Toll (काही ठिकाणी)</li>
-<li>✅ Retail Shopping (काही व्यापाऱ्यांकडे)</li>
-</ul>
-
-<p><strong>⚠️ सर्व ठिकाणी NCMC सुविधा उपलब्ध असेलच असे नाही.</strong></p>
-
-<h2>🔴 ST मध्ये कसं वापरायचं?</h2>
-<ol>
-<li>NCMC कार्ड रिचार्ज करा.</li>
-<li>NCMC-सक्षम ST बसमध्ये चढा.</li>
-<li>कंडक्टरच्या मशीनवर कार्ड Tap करा.</li>
-<li>भाडे कार्डमधून वजा होईल.</li>
-<li>तिकीट मिळेल.</li>
-</ol>
-
-<h2>🔴 कार्ड कुठे मिळेल?</h2>
-<p>हे कार्ड अनेक बँका <strong>RuPay Debit/Prepaid Card</strong> म्हणून देतात. काही ठिकाणी <strong>MSRTC</strong> किंवा <strong>Metro</strong> सुविधा केंद्रांवरही उपलब्ध असू शकते.</p>
-
-<h2>🔴 कोणत्या बँका देतात?</h2>
-<ul>
-<li>SBI</li>
-<li>Bank of Baroda</li>
-<li>Punjab National Bank</li>
-<li>Union Bank</li>
-<li>Canara Bank</li>
-<li>Indian Bank</li>
-<li>Central Bank of India</li>
-<li>UCO Bank</li>
-<li>Karnataka Bank</li>
-<li>Equitas Small Finance Bank</li>
-<li>आणि इतर काही RuPay NCMC कार्ड देणाऱ्या बँका.</li>
-</ul>
-
-<h2>🔴 कार्ड कसं काढायचं?</h2>
-<ol>
-<li>NCMC कार्ड देणाऱ्या बँकेत अर्ज करा.</li>
-<li>KYC पूर्ण करा.</li>
-<li>कार्ड मिळाल्यावर Activate करा.</li>
-<li>आवश्यक रक्कम रिचार्ज/लोड करा.</li>
-<li>वापरायला सुरुवात करा.</li>
-</ol>
-
-<h2>🔴 फायदे</h2>
-<ul>
-<li>✅ Cash Carry करण्याची गरज कमी.</li>
-<li>✅ Contactless Tap &amp; Pay.</li>
-<li>✅ वेगवान व्यवहार.</li>
-<li>✅ एकाच कार्डने अनेक सेवांमध्ये वापर.</li>
-</ul>
-
-<div class="note">
-<strong>⚠️ महत्त्वाची सूचना</strong><br><br>
-NCMC फक्त <strong>NCMC-सक्षम मशीन आणि सेवांवरच</strong> चालते. त्यामुळे वापरण्यापूर्वी संबंधित बस किंवा सेवेमध्ये NCMC सुविधा आहे का ते तपासा.
+<div class="sticky-navbar">
+    <div class="brand-identity">
+        <img src="logo.png" alt="GyanWala Marathi Logo">
+        <span class="brand-name">GyanWala Marathi</span>
+    </div>
+    <div class="navbar-right-tag">
+        <i class="fa-solid fa-bolt"></i> NCMC Guide
+    </div>
 </div>
+
+<div class="container">
+    
+    <div class="header-area">
+        <h1>NCMC म्हणजे काय?</h1>
+    </div>
+
+    <p><strong>NCMC</strong> म्हणजेच <span class="highlight">National Common Mobility Card</span> होय. याला भारत सरकारद्वारे <strong>"One Nation, One Card"</strong> (एक देश, एक कार्ड) म्हणून ओळखले जाते. हे प्रगत तंत्रज्ञानावर आधारित <strong>RuPay Contactless कार्ड</strong> आहे.</p>
+    
+    <h2><i class="fa-solid fa-circle-question"></i> याचा उपयोग काय?</h2>
+    <p>या कार्डचा मुख्य उपयोग <strong>NCMC-सक्षम सार्वजनिक वाहतूक सेवांमध्ये</strong> सुट्या पैशांशिवाय, फक्त machine वर कार्ड 'Tap' करून अवघ्या काही सेकंदांत सुरक्षित पेमेंट करण्यासाठी होतो.</p>
+
+    <h2><i class="fa-solid fa-users"></i> कोण वापरू शकतं?</h2>
+    <ul>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> १८ वर्षांवरील कोणतीही भारतीय व्यक्ती हे कार्ड मिळवू शकते.</li>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> काही बँका अल्पवयीन (Minor) मुलांसाठी त्यांच्या पालकांच्या संमतीने आणि आवश्यक कागदपत्रांसह हे कार्ड देतात. (नियम बँकेनुसार बदलू शकतात.)</li>
+    </ul>
+    
+    <h2><i class="fa-solid fa-location-dot"></i> कुठे वापरता येते?</h2>
+    <ul class="grid-layout">
+        <li><i class="fa-solid fa-bus"></i> NCMC-सक्षम MSRTC (ST) बस</li>
+        <li><i class="fa-solid fa-train-subway"></i> मेट्रो रेल्वे (Metro)</li>
+        <li><i class="fa-solid fa-bus-simple"></i> शहर वाहतूक बस (City Bus)</li>
+        <li><i class="fa-solid fa-square-parking"></i> पार्किंग शुल्क (काही ठिकाणी)</li>
+        <li><i class="fa-solid fa-road"></i> हायवे टोल नाके (काही ठिकाणी)</li>
+        <li><i class="fa-solid fa-bag-shopping"></i> रिटेल शॉपिंग (निवडक व्यापाऱ्यांकडे)</li>
+    </ul>
+    <div class="warning-box"><i class="fa-solid fa-triangle-exclamation"></i> सूचना: सध्या सर्वच शहरांमध्ये किंवा मार्गांवर ही सुविधा पूर्णपणे सुरू नसू शकते.</div>
+
+    <h2><i class="fa-solid fa-bus"></i> ST बसमध्ये कसं वापरायचं?</h2>
+    <ol>
+        <li>तुमचे NCMC कार्ड आधी आवश्यकतेनुसार रिचार्ज करून घ्या.</li>
+        <li>NCMC-सक्षम असलेल्या ST बसमध्ये प्रवास करताना कंडक्टरला कार्ड पेमेंटबद्दल सांगा.</li>
+        <li>कंडक्टरच्या तिकीट मशीनवर (ETIM) digitale तुमचे कार्ड फक्त 'Tap' करा.</li>
+        <li>प्रवासाचे भाडे कार्डमधील उपलब्ध शिल्लक रकमेतून (Balance) थेट वजा होईल.</li>
+        <li>मशीनमधून तिकीट निघेल आणि कंडक्टर तुम्हाला तिकीट देईल.</li>
+    </ol>
+
+    <h2><i class="fa-solid fa-credit-card"></i> कार्ड कुठे मिळेल?</h2>
+    <p>हे कार्ड अनेक प्रमुख बँका त्यांच्या <strong>RuPay Debit अथवा Prepaid Card</strong> स्वरूपात देतात. याशिवाय, हे कार्ड <strong>MSRTC चे प्रमुख डेपो</strong> किंवा <strong>मेट्रो स्टेशनच्या</strong> अधिकृत तिकीट खिडकी/सुविधा केंद्रांवरही उपलब्ध असू शकते.</p>
+
+    <h2><i class="fa-solid fa-building-columns"></i> कोणत्या बँका हे कार्ड देतात?</h2>
+    <ul class="grid-layout">
+        <li><i class="fa-solid fa-building"></i> State Bank of India (SBI)</li>
+        <li><i class="fa-solid fa-building"></i> Bank of Baroda</li>
+        <li><i class="fa-solid fa-building"></i> Punjab National Bank</li>
+        <li><i class="fa-solid fa-building"></i> Union Bank of India</li>
+        <li><i class="fa-solid fa-building"></i> Canara Bank</li>
+        <li><i class="fa-solid fa-building"></i> Indian Bank</li>
+        <li><i class="fa-solid fa-building"></i> Central Bank of India</li>
+        <li><i class="fa-solid fa-building"></i> UCO Bank</li>
+        <li><i class="fa-solid fa-building"></i> Karnataka Bank</li>
+        <li><i class="fa-solid fa-building"></i> Equitas Small Finance Bank</li>
+    </ul>
+
+    <h2><i class="fa-solid fa-id-card"></i> कार्ड कसं काढायचं?</h2>
+    <ol>
+        <li>NCMC सुविधा देणाऱ्या कोणत्याही बँकेत नवीन कार्डसाठी अर्ज करा.</li>
+        <li>तुमची आवश्यक KYC प्रक्रिया पूर्ण करा.</li>
+        <li>कार्ड मिळाल्यानंतर बँकेच्या सूचनेनुसार ते ऍक्टिव्हेट (Activate) करा.</li>
+        <li>कार्डमध्ये इंटरनेट बँकिंग किंवा काउंटरवरून आवश्यक रक्कम लोड/रिचार्ज करा.</li>
+        <li>तुमचे कार्ड प्रवासासाठी आणि खरेदीसाठी तयार आहे!</li>
+    </ol>
+
+    <h2><i class="fa-solid fa-file-invoice"></i> कोणती कागदपत्रे लागतात?</h2>
+    <ul class="grid-layout">
+        <li><i class="fa-solid fa-address-card"></i> आधार कार्ड</li>
+        <li><i class="fa-solid fa-address-card"></i> PAN कार्ड (लागू असल्यास)</li>
+        <li><i class="fa-solid fa-phone"></i> वैध मोबाईल नंबर</li>
+        <li><i class="fa-solid fa-file-lines"></i> इतर बँक KYC कागदपत्रे</li>
+        <li><i class="fa-solid fa-user-image"></i> पासपोर्ट साईज फोटो</li>
+    </ul>
+
+    <h2><i class="fa-solid fa-bolt"></i> रिचार्ज कसा करायचा?</h2>
+    <ul class="grid-layout">
+        <li><i class="fa-solid fa-globe"></i> नेट बँकिंग (Net Banking)</li>
+        <li><i class="fa-solid fa-mobile-screen"></i> मोबाईल बँकिंग ॲप</li>
+        <li><i class="fa-solid fa-qrcode"></i> UPI ॲप्सद्वारे (बँकेनुसार)</li>
+        <li><i class="fa-solid fa-house-chimney-window"></i> बँकेच्या शाखेत जाऊन</li>
+        <li><i class="fa-solid fa-shop"></i> अधिकृत NCMC रिचार्ज सेंटरवर</li>
+    </ul>
+
+    <h2><i class="fa-solid fa-wallet"></i> Balance कसा तपासायचा?</h2>
+    <ul class="grid-layout">
+        <li><i class="fa-solid fa-cellphone"></i> बँकेच्या मोबाईल बँकिंग ॲपवर</li>
+        <li><i class="fa-solid fa-money-bill-transfer"></i> ATM मशीनद्वारे (लागू असल्यास)</li>
+        <li><i class="fa-solid fa-headset"></i> कस्टमर केअरला कॉल करून</li>
+        <li><i class="fa-solid fa-building"></i> बँकेच्या शाखेत भेट देऊन</li>
+    </ul>
+
+    <h2><i class="fa-solid fa-key"></i> PIN लागतो का?</h2>
+    <p>ST बस किंवा मेट्रोमध्ये प्रवास करताना मशीनवर फक्त <strong>Tap करून पेमेंट करताना सामान्यतः PIN ची गरज पडत नाही.</strong> मात्र, हेच कार्ड जर तुम्ही ATM मधून पैसे काढण्यासाठी किंवा इतर मोठ्या बँक व्यवहारांसाठी वापरले, तर सुरक्षा म्हणून PIN टाकावा लागतो.</p>
+
+    <h2><i class="fa-solid fa-calendar-days"></i> कार्डची वैधता (Validity)</h2>
+    <p>प्रत्येक कार्डची एक ठराविक <strong>Expiry Date (वैधता)</strong> असते, जी कार्डच्या दर्शनी भागावर छापलेली असते. ही वैधता कार्ड देणाऱ्या बँकेच्या नियमांनुसार बदलू शकते.</p>
+
+    <h2><i class="fa-solid fa-star"></i> प्रमुख फायदे</h2>
+    <ul>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> खिशात रोख कॅश (Cash) बाळगण्याची गरज भासत नाही.</li>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> अत्यंत सुरक्षित आणि वेगवान 'Tap & Pay' संपर्करहित तंत्रज्ञान.</li>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> सुट्या पैशांवरून होणारे वाद किंवा कटकटी पूर्णपणे थांबतात.</li>
+        <li><i class="fa-solid fa-circle-check check-icon"></i> एकाच कार्डचा वापर बस, मेट्रो, पार्किंग अशा विविध ठिकाणी शक्य.</li>
+    </ul>
+
+    <h2><i class="fa-solid fa-shield-halved"></i> कार्ड हरवल्यास काय कराल?</h2>
+    <div class="danger-box">
+        <strong><i class="fa-solid fa-circle-exclamation"></i> अत्यंत महत्त्वाचे:</strong><br>
+        १. कार्ड गहाळ किंवा चोरीला गेल्यास त्वरित संबंधित बँकेच्या <strong>Customer Care</strong> नंबरवर संपर्क साधा.<br>
+        २. सुरक्षेसाठी तुमचे कार्ड तात्काळ <strong>Block (बंद)</strong> करून घ्या.<br>
+        ३. त्यानंतर बँकेत रीतसर अर्ज करून नवीन (Replacement) कार्डसाठी मागणी करा.
+    </div>
+
+    <h2><i class="fa-solid fa-comments-question"></i> सामान्य प्रश्न (FAQ)</h2>
+    
+    <div class="faq-item">
+        <div class="faq-question">प्र. हे कार्ड मोफत मिळतं का?</div>
+        <div class="faq-answer">उ. नाही, वेगवेगळ्या बँका किंवा मेट्रो प्रशासनानुसार कार्डसाठी ठराविक इश्यू फी (Issue Fee) किंवा वार्षिक शुल्क लागू असू शकते.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">प्र. एका कार्डाने अनेक वेळा प्रवास करता येतो का?</div>
+        <div class="faq-answer">उ. हो, जोपर्यंत तुमच्या कार्डमध्ये प्रवासाच्या भाड्याइतका पुरेसा बॅलन्स (Balance) उपलब्ध आहे, तोपर्यंत तुम्ही कितीही वेळा प्रवास करू शकता.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">प्र. कार्डमधील रिचार्ज संपला तर काय करावे?</div>
+        <div class="faq-answer">उ. रिचार्ज संपल्यावर कार्ड काम करणार नाही. तुम्ही ऑनलाईन किंवा काउंटरवर जाऊन पुन्हा ते रिचार्ज करून लगेच वापरू शकता.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">प्र. हे कार्ड संपूर्ण भारतभर चालेल का?</div>
+        <div class="faq-answer">उ. हो, हे कार्ड संपूर्ण भारतात कुठेही चालेल, पण फक्त ज्या ठिकाणी 'NCMC-सक्षम' मशिन्स आणि सेवा उपलब्ध आहेत तिथेच हे काम करेल.</div>
+    </div>
+
+    <div class="note">
+        <div class="note-title"><i class="fa-solid fa-circle-info"></i> महत्त्वाची सूचना</div>
+        <p>NCMC कार्ड फक्त <strong>NCMC-सक्षम (NCMC-enabled) यंत्रणेवरच</strong> कार्य करते. त्यामुळे प्रवासाला निघण्यापूर्वी संबंधित बस, मेट्रो स्थानक अथवा काउंटरवर ही डिजिटल सुविधा उपलब्ध असल्याची खात्री करून घ्या. कार्डचे नेमके शुल्क, नियम आणि अटी बँक व परिवहन महामंडळानुसार बदलू शकतात.</p>
+    </div>
 
 </div>
 
